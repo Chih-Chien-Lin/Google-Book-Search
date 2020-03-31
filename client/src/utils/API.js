@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const saveBook = bookData => {
-  return axios.post('/api/books', bookDate)
+  return axios.post('/api/books', bookData)
 }
 
 export const getSavedBooks = () => {
