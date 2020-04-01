@@ -6,66 +6,69 @@ import Column from '../components/Column';
 import Card from '../components/Card';
 import { removeBook, getSavedBooks } from '../utils/API'
 
-class Saved extends Component{
-    state={
-        bookList:[]
+class Saved extends Component {
+    state = {
+        bookList: []
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.handleGetSavedBooks()
     }
 
     handleGetSavedBooks = () => {
-        getSavedBooks().then(({ data:bookList })=>{
-            this.setState({bookList})
+        getSavedBooks().then(({ data: bookList }) => {
+            this.setState({ bookList })
         }).catch(err => console.log(err))
     }
-    handleRemoveBook = bookId =>{
+    handleRemoveBook = bookId => {
+        console.log(bookId)
         removeBook(bookId).then(this.handleGetSavedBooks).catch(err => console.log(err))
     }
 
-    render(){
-        return(
+    render() {
+        console.log(this.state)
+        return (
             <>
-            <Jumbotron
-                fluid
-                bg={'dark'}
-                color={'light'}
-                pageTitle={'Viewing Saved Books'}
-            >
+
+                <Jumbotron
+                    fluid
+                    bg={'dark'}
+                    color={'light'}
+                    pageTitle={'Viewing Saved Books'}
+                />
                 <Container>
                     <Row>
                         {!this.state.bookList.length ? (
                             <h2 className="text-center">No saved book, yet....</h2>
                         ) : (
-                            this.state.bookList.map(book => {
-                                return(
-                                    <Column key={book._id} md={4}>
-                                        <Card
-                                            bg={'darl'}
-                                            title={book.title}
-                                            omage={book.image ? book.image : undefined}
-                                        >
-                                            <small className='text-muted'>
-                                                {`By: ${
-                                                    book.authors.length ? book.authors.join(', ') : null
-                                                }`}
-                                            </small>
-                                            <p>
-                                                {book.description}
-                                            </p>
-                                            <button onClick={() => this.handleGetSavedBooks(book._id)} className="btn btn-danger btn-sm">
-                                                Remove Book
+                                this.state.bookList.map(book => {
+                                    return (
+                                        <Column key={book._id} md={4}>
+                                            <Card
+                                                bg={'dark'}
+                                                title={book.title}
+                                                image={book.image ? book.image : undefined}
+                                            >
+                                                <small className='text-muted'>
+                                                    {`By: ${
+                                                        book.authors.length ? book.authors.join(', ') : null
+                                                        }`}
+                                                </small>
+                                                <p>
+                                                    {book.description}
+                                                </p>
+                                                <button onClick={() => this.handleRemoveBook(book._id)} className="btn btn-danger btn-sm">
+                                                    Remove Book
                                             </button>
-                                        </Card>
-                                    </Column>
-                                )
-                            })
-                        )}
+                                            </Card>
+                                        </Column>
+                                    )
+                                })
+                            )}
                     </Row>
                 </Container>
 
-            </Jumbotron>
+                {/* </Jumbotron> */}
             </>
         );
     }

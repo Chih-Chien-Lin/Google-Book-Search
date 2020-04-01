@@ -1,4 +1,4 @@
-const Book = require("../models");
+const { Book } = require("../models");
 
 const getSavedBooks = (req, res) =>{
   Book.find({})

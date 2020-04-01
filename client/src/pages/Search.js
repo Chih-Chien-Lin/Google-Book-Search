@@ -8,7 +8,7 @@ import { searchGoogleBooks, saveBook, getSavedBooks } from '../utils/API'
 
 class Search extends Component {
     state = {
-        SearchTerm: '',
+        searchTerm: '',
         bookList: [],
         savedBookIds: [],
         error: null
@@ -32,19 +32,20 @@ class Search extends Component {
             const { items } = res.data;
             this.setState({ error: null });
             const bookListCleaned = items.map(book => {
+                console.log(book)
                 return {
                     bookId: book.id,
                     title: book.volumeInfo.title,
                     authors: book.volumeInfo.authors,
                     description: book.volumeInfo.description,
-                    image: book.volumeInfo.imageLink
-                        ? book.volumeInfo.imageLink.thumbnail
+                    image: book.volumeInfo.imageLinks
+                        ? book.volumeInfo.imageLinks.thumbnail
                         : ''
                 };
             });
 
             return this.setState({ bookList: bookListCleaned, searchTerm: '' })
-        }).then(this.retrieveSavedBooks).catch(err => this.setState({ error: err }));
+        }).then(this.retrieveSavedBooks).catch(err => console.log(err));
 
 
     };
@@ -54,16 +55,16 @@ class Search extends Component {
             const savedBookIds = res.data.map(book => book.bookId);
             this.setState({ savedBookIds });
         })
-            .catch(err => this.setState({ error: err }));
+            .catch(err => console.log(err));
     };
 
     handleBookSaveBook = bookId => {
         const book = this.state.bookList.find(book => book.bookId === bookId)
         saveBook(book).then(() => {
-            const savedBookIds = [...this.setState.savedBookIds, bookId];
+            const savedBookIds = [...this.state.savedBookIds, bookId];
             this.setState({ savedBookIds });
         })
-            .catch(err => this.setState({ error: err }));
+            .catch(err => console.log(err));
     };
 
     render() {
@@ -124,9 +125,9 @@ class Search extends Component {
                                                     this.state.savedBookIds.includes(book.bookId) ? true : undefined
                                                 }
                                                 className={'btn btn-success btn-sm'}
-                                                onclick={() => this.handleBookSaveBook(book.bookId)}
+                                                onClick={() => this.handleBookSaveBook(book.bookId)}
                                             >
-
+                                                Save
                                             </button>
                                         </Card>
                                     </Column>

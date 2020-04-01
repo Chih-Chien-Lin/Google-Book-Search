@@ -14,7 +14,7 @@ const Jumbotron = props => {
             text-${props.color || 'dark'}
             text-center
         `}>
-            <container>
+            <Container>
                 <Row helper = {'justify-content-around'}>
                     <Column>
                         <h1>{props.pageTitle}</h1>
@@ -32,7 +32,7 @@ const Jumbotron = props => {
                         </NavLink>
                     </Column>
                 </Row>
-            </container>
+            </Container>
         </div>
     );
 };
