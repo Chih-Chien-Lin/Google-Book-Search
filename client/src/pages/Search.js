@@ -107,7 +107,7 @@ class Search extends Component {
                                 </h2>
                             ) : (this.state.bookList.map(book => {
                                 return (
-                                    <Column key={book.bookId} md={4}>
+                                    <Column key={book.bookId} md={10}>
                                         <Card
                                             title={book.title}
                                             image={book.image ? book.image : undefined}
