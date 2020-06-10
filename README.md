@@ -18,3 +18,8 @@ If used through the CLI, please remember to run "npm i" to install all necessary
 # Contributing
 # Qustions
 If you have anyquestion, please feel free to contatct me through the followings:
+https://github.com/Chih-Chien-Lin
+<p align="center">
+            <img alt="Personal avatar" style="height:200px; width:300px" src="client/src/image/demo1.png">
+            <img alt="Personal avatar" style="height:200px; width:300px; margin-left:3%" src="client/src/image/demo2.png">
+          </p>
