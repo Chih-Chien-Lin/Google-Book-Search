@@ -11,6 +11,7 @@ const bookSchema = new Schema({
   date: { type: Date, default: Date.now }
 });
 
+const test = 1;
 const Book = mongoose.model("Book", bookSchema);
 
 module.exports = Book;
